@@ -4,6 +4,7 @@ import { createRoot } from "https://esm.sh/react-dom@19.2.6/client";
 const h = React.createElement;
 const { useState } = React;
 
+
 const iconPaths = {
   badgeCheck: [
     ["path", { d: "M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" }],
