@@ -1,0 +1,11 @@
+{
+  "name": "parasite-people-party",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/server.js",
+    "start": "node scripts/server.js",
+    "build": "node scripts/build.js"
+  }
+}
