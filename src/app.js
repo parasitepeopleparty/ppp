@@ -2,7 +2,6 @@ import React from "https://esm.sh/react@19.2.6";
 import { createRoot } from "https://esm.sh/react-dom@19.2.6/client";
 
 const h = React.createElement;
-const { useState } = React;
 
 const iconPaths = {
   badgeCheck: [
@@ -57,11 +56,11 @@ const manifesto = [
   },
   {
     title: "Protect Every Legit Vote",
-    copy: "If any legitimate vote is deleted, whether in a CJP or opposition-ruled state, the CEC shall be arrested under UAPA, as taking away voting rights of citizens is no less than terrorism.",
+    copy: "If any legitimate vote is deleted, whether in a PPP or CJP or opposition-ruled state, the CEC shall be arrested under UAPA, as taking away voting rights of citizens is no less than terrorism.",
   },
   {
     title: "No Fraud Investigation By Police Or Bribe By Police",
-    copy: "IAS and IPS degrees shall be suspended for lifetime in proven cases.",
+    copy: "IAS and IPS degrees shall be suspended for lifetime in proven cases of Misuse of Power and Corruption.",
   },
   {
     title: "No Delay In Justice",
@@ -77,7 +76,7 @@ const manifesto = [
   },
   {
     title: "Equal Punishment For Serious Offence Misuse",
-    copy: "Rightly accused people and fake rape accusers will both face equal punishment. No mercy in serious offence misuse.",
+    copy: "Rightly accused people or fake rape accusers will face equal punishment. No mercy in serious offence misuse.",
   },
 ];
 
@@ -102,13 +101,15 @@ const slogans = [
   "Now accepting rants, retweets, and resentment",
 ];
 
-function App() {
-  const [isFollowModalOpen, setFollowModalOpen] = useState(false);
-  const openFollowModal = (event) => {
-    event.preventDefault();
-    setFollowModalOpen(true);
-  };
+const socialLinks = {
+  instagram: "https://www.instagram.com/parasitepeopleparty/",
+  facebook: "https://www.facebook.com/parasitepeopleparty",
+  x: "https://x.com/PPP_2029",
+};
+const membershipFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdCs1lPvihf4DsgeGbo2E4c3ziSrhDdxChwb0xEX8CsUMOGhA/viewform?usp=send_form";
+const membershipFormEmbedUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdCs1lPvihf4DsgeGbo2E4c3ziSrhDdxChwb0xEX8CsUMOGhA/viewform?embedded=true";
 
+function App() {
   return h(
     "main",
     null,
@@ -121,7 +122,14 @@ function App() {
         h("span", { className: "brand-mark" }, "PPP"),
         h("span", null, "Parasite People Party"),
       ),
-      h("nav", null, h("a", { href: "#manifesto" }, "Manifesto"), h("a", { href: "#join" }, "Join")),
+      h(
+        "nav",
+        null,
+        h("a", { href: "#mission" }, "Mission"),
+        h("a", { href: "#manifesto" }, "Manifesto"),
+        h("a", { href: "#eligibility" }, "Eligibility"),
+        h("a", { href: "#social" }, "Join"),
+      ),
     ),
     h(
       "section",
@@ -130,12 +138,21 @@ function App() {
         "div",
         { className: "hero-copy" },
         h("p", { className: "kicker" }, "Voice of the People, expose the reality with transparency."),
-        h("h1", null, "Parasite People Party"),
+        h(
+          "h1",
+          { className: "hero-title" },
+          h("span", null, "For the"),
+          h("span", null, "people they"),
+          h("span", { className: "hero-title-accent" }, "mocked, delayed,"),
+          h("span", { className: "hero-title-script" }, "and discarded."),
+        ),
+        h("p", { className: "hero-subcopy" }, "A political movement for the unheard majority."),
+        h("p", { className: "hero-subcopy strong" }, "No sponsors. No puppeteers. Just demands."),
         h("p", { className: "lede" }, "Power to the people, For the People, By The people"),
         h(
           "div",
           { className: "hero-actions" },
-          h("a", { className: "button primary", href: "#join" }, h(Icon, { name: "vote", size: 20 }), "Join the movement"),
+          h("a", { className: "button primary", href: "#social" }, h(Icon, { name: "vote", size: 20 }), "Join the movement"),
           h("a", { className: "button secondary", href: "#manifesto" }, h(Icon, { name: "megaphone", size: 20 }), "Read manifesto"),
         ),
       ),
@@ -144,7 +161,28 @@ function App() {
     h("section", { className: "ticker", "aria-label": "Campaign slogans" }, [...slogans, ...slogans].map((slogan, index) => h("span", { key: `${slogan}-${index}` }, slogan))),
     h(
       "section",
-      { className: "vision-section" },
+      { className: "unity-marquee", "aria-label": "Movement slogans" },
+      h(
+        "div",
+        { className: "marquee-track" },
+        [
+          "Together We Survive",
+          "Stronger Together",
+          "Unity · Resilience · Progress",
+          "You Cannot Squash A Movement",
+          "Together We Survive",
+          "Stronger Together",
+          "Unity · Resilience · Progress",
+          "You Cannot Squash A Movement",
+        ].map((item, index) => [
+          h("span", { key: `${item}-${index}` }, item),
+          h("span", { className: "dot", key: `dot-${index}` }, "✦"),
+        ]),
+      ),
+    ),
+    h(
+      "section",
+      { className: "vision-section", id: "mission" },
       h(
         "div",
         { className: "vision-title" },
@@ -204,7 +242,7 @@ function App() {
     ),
     h(
       "section",
-      { className: "join-band", id: "join" },
+      { className: "join-band", id: "eligibility" },
       h(
         "div",
         { className: "join-copy" },
@@ -220,7 +258,7 @@ function App() {
           "div",
           { className: "join-panel" },
           eligibility.map((item) => h("div", { className: "check-row", key: item }, h(Icon, { name: "checkCircle", size: 22 }), h("span", null, item))),
-          h("div", { className: "inline-join" }, h("a", { className: "button primary full", href: "#join", onClick: openFollowModal }, h(Icon, { name: "handshake", size: 20 }), "Join the party"), h("p", null, "Membership is free, lifelong, and revocable only by you."), h("p", null, "No fees. No selfies with the leader. No \"missed call to register.\"")),
+          h("div", { className: "inline-join" }, h("a", { className: "button primary full", href: "#social" }, h(Icon, { name: "handshake", size: 20 }), "Join the party"), h("p", null, "Membership is free, lifelong, and revocable only by you."), h("p", null, "No fees. No selfies with the leader. No \"missed call to register.\"")),
         ),
         h(
           "figure",
@@ -229,31 +267,61 @@ function App() {
         ),
       ),
     ),
-    isFollowModalOpen &&
+    h(
+      "section",
+      { className: "social-section", id: "social" },
       h(
         "div",
-        { className: "modal-backdrop", role: "presentation", onClick: () => setFollowModalOpen(false) },
+        { className: "section-heading" },
+        h("p", { className: "eyebrow" }, "Connect with us"),
+        h("h2", null, "Join the Party"),
+        h("p", null, "Fill the membership form and follow the official Parasite People Party accounts for posts, campaign updates, and public announcements."),
+      ),
+      h(
+        "div",
+        { className: "connect-grid" },
         h(
-          "section",
-          {
-            className: "follow-modal",
-            role: "dialog",
-            "aria-modal": "true",
-            "aria-labelledby": "follow-title",
-            onClick: (event) => event.stopPropagation(),
-          },
-          h("button", { className: "modal-close", type: "button", "aria-label": "Close follow popup", onClick: () => setFollowModalOpen(false) }, "X"),
-          h("p", { className: "eyebrow" }, "Membership"),
-          h("h2", { id: "follow-title" }, "Follow PPP"),
-          h("p", null, "To join the movement, follow both official Parasite People Party accounts."),
+          "div",
+          { className: "social-grid" },
+          h(
+            "article",
+            { className: "social-card" },
+            h("img", { src: "./public/assets/parasite-party-emblem.png", alt: "" }),
+            h("div", null, h("h3", null, "Instagram"), h("p", null, "@parasitepeopleparty")),
+            h("a", { className: "button primary full", href: socialLinks.instagram, target: "_blank", rel: "noreferrer" }, "Follow Instagram"),
+          ),
+          h(
+            "article",
+            { className: "social-card" },
+            h("img", { src: "./public/assets/bottom-banner.png", alt: "" }),
+            h("div", null, h("h3", null, "Facebook"), h("p", null, "Parasite People Party")),
+            h("a", { className: "button primary full", href: socialLinks.facebook, target: "_blank", rel: "noreferrer" }, "Follow Facebook"),
+          ),
+          h(
+            "article",
+            { className: "social-card" },
+            h("img", { src: "./public/assets/parasite-party-emblem.png", alt: "" }),
+            h("div", null, h("h3", null, "X"), h("p", null, "@PPP_2029")),
+            h("a", { className: "button primary full", href: socialLinks.x, target: "_blank", rel: "noreferrer" }, "Follow X"),
+          ),
+        ),
+        h(
+          "div",
+          { className: "form-embed" },
+          h("iframe", {
+            title: "Parasite People Party membership form",
+            src: membershipFormEmbedUrl,
+            loading: "lazy",
+          }),
           h(
             "div",
-            { className: "follow-actions" },
-            h("a", { className: "button primary", href: "https://www.instagram.com/parasitepeopleparty/", target: "_blank", rel: "noreferrer" }, "Instagram"),
-            h("a", { className: "button secondary", href: "https://x.com/PPP_2029", target: "_blank", rel: "noreferrer" }, "X"),
+            { className: "form-embed-actions" },
+            h("p", null, "If the form does not load inside your browser, open it directly."),
+            h("a", { className: "button primary", href: membershipFormUrl, target: "_blank", rel: "noreferrer" }, "Open Google Form"),
           ),
         ),
       ),
+    ),
     h("section", { className: "bottom-banner", "aria-label": "Parasite People Party rally banner" }, h("img", { src: "./public/assets/bottom-banner.png", alt: "" })),
     h("footer", null, h("div", null, h(Icon, { name: "badgeCheck", size: 22 }), h("strong", null, "Parasite People Party")), h("p", null, "Fictional satire. No real electoral claims, only ceremonial laziness.")),
   );
